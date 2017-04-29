@@ -1,0 +1,20 @@
+{
+    "name": "Google-Photo-Takeout-Timestamp",
+    "version": "0.0.1",
+    "main": "index.js",
+    "repository": "git@github.com:PaulLockwood/Google-Photo-Takeout-Timestamp.git",
+    "author": "Paul Lockwood <plockwood@shipjunction.com>",
+    "license": "Copyright",
+    "scripts": {
+        "build": "tsc -p .",
+        "tsc_version": "tsc -v",
+        "test": "test",
+        "start": "node run-me-via-node.js"
+    },
+    "dependencies": {
+        "reflect-metadata": "0.1.x"
+    },
+    "devDependencies": {
+        "typescript": "2.3.x"
+    }
+}

@@ -1,0 +1,11 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "src/**/*.js": true,
+        "src/**/*.map": true,
+        "dist": true
+    },
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "tsia.addSpacesAroundBracketedImport": true,
+    "genGetSet.spacedImportLine": true
+}
