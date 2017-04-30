@@ -7,15 +7,21 @@ export class LogicWip {
 
     static async Go(rootFolder: string) {
         console.log('1');
-        const promise = LogicWip.GetDirectoryContents(rootFolder);
+        const promise = LogicWip.GetTopLevelFolders(rootFolder);
 
-        let directoryContents = await promise;
+        let subFolders = await promise;
         console.log("2");
-        console.log(Logger.stringify(directoryContents));
+        console.log(Logger.stringify(subFolders));
         console.log("3");
+
+        LogicWip.ProcessOneFolderOfPhotos(subFolders[0]);
+
+        // for (let curFolder of subFolders) {
+        //     LogicWip.ProcessOneFolderOfPhotos(curFolder);
+        // }
     }
 
-    static GetDirectoryContents(folder: string): Promise<Array<string>> {
+    static GetTopLevelFolders(folder: string): Promise<Array<string>> {
         const promise1: Promise<Array<string>> = new Promise((resolve, reject) => {
             fs.readdir(folder,
                 (err, files) => {
@@ -28,8 +34,9 @@ export class LogicWip {
                         let directories = new Array<string>();
 
                         files.map((x) => {
-                            if (fs.statSync(path.join(folder, x)).isDirectory()) {
-                                directories.push(x);
+                            let potentialFolder = path.join(folder, x);
+                            if (fs.statSync(potentialFolder).isDirectory()) {
+                                directories.push(potentialFolder);
                             }
                         });
 
@@ -42,5 +49,18 @@ export class LogicWip {
         });
 
         return promise1;
+    }
+
+    static ProcessOneFolderOfPhotos(folder: string) {
+        // Read date from the .json file
+        let jsonFile = path.join(folder, 'metadata.json');
+
+        let json = fs.readFileSync(jsonFile, "utf8");
+        console.log(Logger.stringify(json));
+        const jsonObj = JSON.parse(json);
+        const dateString = (jsonObj as any).albumData.date;
+        console.log(dateString);
+        const jsDate: Date = new Date(Date.parse(dateString))
+        console.log(jsDate.toLocaleString());
     }
 }
