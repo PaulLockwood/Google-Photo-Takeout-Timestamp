@@ -3,9 +3,15 @@
     "files.exclude": {
         "src/**/*.js": true,
         "src/**/*.map": true,
-        "dist": true
+        "dist": true,
+        "run-me-via-node.js": true,
+        "run-me-via-node.js.map": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
     },
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "tsia.addSpacesAroundBracketedImport": true,
-    "genGetSet.spacedImportLine": true
+    "typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib",
+    "typescript.relativeImport": false
 }

@@ -12,9 +12,10 @@
         "start": "node run-me-via-node.js"
     },
     "dependencies": {
-        "reflect-metadata": "0.1.x"
+        "stringify-object": "^3.2.0"
     },
     "devDependencies": {
+        "@types/node": "^6.x.x",
         "typescript": "2.3.x"
     }
 }
