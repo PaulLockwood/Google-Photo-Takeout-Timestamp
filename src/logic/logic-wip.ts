@@ -17,6 +17,7 @@ export class LogicWip {
         for (const curFolder of subFolders) {
             const defaultDate = LogicWip.GetDefaultDateForFolder(curFolder);
             const filesToProcess = LogicWip.FindFilesWithoutImplicitTimeStamp(curFolder);
+            LogicWip.SetTimestampOnFiles(defaultDate, filesToProcess);
         }
 
     }
@@ -85,7 +86,8 @@ export class LogicWip {
         let result: Array<string> = new Array<string>();
         for (const curFile of jpgFiles) {
             if (!curFile.startsWith(usualStartOfFileName)) {
-                result.push(curFile);
+                let fullfileName = path.join(folder, curFile);
+                result.push(fullfileName);
             } else {
                 // console.log('OK: ' + curFile);
             }
@@ -95,6 +97,20 @@ export class LogicWip {
         // console.log(Logger.stringify(result));
 
         return result;
+    }
+
+    private static SetTimestampOnFiles(defaultDate: Date, files: Array<string>) {
+
+        console.log(defaultDate.toLocaleDateString());
+        let mTime = defaultDate.valueOf() / 1000;
+        // let mTime = new Date(defaultDate).getUTCMilliseconds();
+        // let mTime = defaultDate.getUTCMilliseconds()
+
+        for (const curFile of files) {
+            console.log(curFile);
+            fs.utimesSync(curFile, mTime, mTime);
+        }
+
     }
 
 }
