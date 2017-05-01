@@ -6,6 +6,10 @@
   version "6.0.71"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.71.tgz#aa49e0109e35f1457867b45822caf7f4883ca248"
 
+"@types/stringify-object@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@types/stringify-object/-/stringify-object-3.1.1.tgz#54809af6e28d2e17efde1ed73a363b0343b261ec"
+
 get-own-enumerable-property-symbols@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-1.0.1.tgz#f1d4e3ad1402e039898e56d1e9b9aa924c26e484"

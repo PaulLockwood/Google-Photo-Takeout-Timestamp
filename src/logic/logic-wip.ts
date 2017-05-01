@@ -14,11 +14,11 @@ export class LogicWip {
         console.log(Logger.stringify(subFolders));
         console.log("3");
 
-        LogicWip.GetDefaultDateForFolder(subFolders[0]);
+        for (const curFolder of subFolders) {
+            const defaultDate = LogicWip.GetDefaultDateForFolder(curFolder);
+            const filesToProcess = LogicWip.FindFilesWithoutImplicitTimeStamp(curFolder);
+        }
 
-        // for (let curFolder of subFolders) {
-        //     LogicWip.ProcessOneFolderOfPhotos(curFolder);
-        // }
     }
 
     static GetTopLevelFolders(folder: string): Promise<Array<string>> {
@@ -51,7 +51,7 @@ export class LogicWip {
         return promise1;
     }
 
-    static GetDefaultDateForFolder(folder: string) {
+    static GetDefaultDateForFolder(folder: string): Date {
         // Read date from the .json file
         let jsonFile = path.join(folder, 'metadata.json');
 
@@ -62,7 +62,39 @@ export class LogicWip {
         // console.log(dateString);
         const jsDate: Date = new Date(Date.parse(dateString))
         console.log('Default date for folder: ' + jsDate.toLocaleString());
+
+        return jsDate;
     }
 
-    
+    static FindFilesWithoutImplicitTimeStamp(folder: string): Array<string> {
+
+        let jpgFiles;
+        {
+            // Find .jpg files in the folder
+            let files = fs.readdirSync(folder);
+            // Filter to just *.jpg
+            jpgFiles = files.filter((x: string) => x.toLowerCase().endsWith(".jpg"));
+        }
+
+        // Find files who's name don't include the implicit timestamp
+        let folderName = folder.substring(folder.lastIndexOf('/') + 1);
+        let usualStartOfFileName = 'IMG_' + folderName.replace('-', '').replace('-', '') + '_';
+
+        console.log('usualStartOfFileName is ' + usualStartOfFileName);
+
+        let result: Array<string> = new Array<string>();
+        for (const curFile of jpgFiles) {
+            if (!curFile.startsWith(usualStartOfFileName)) {
+                result.push(curFile);
+            } else {
+                // console.log('OK: ' + curFile);
+            }
+
+        }
+
+        // console.log(Logger.stringify(result));
+
+        return result;
+    }
+
 }
