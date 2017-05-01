@@ -7,6 +7,6 @@ console.log('Google Photos Takeout Timestamp Tool: fix to match filenames');
 
 // console.log(process.env.HOME);
 
-const rootFolder = process.env.HOME + '/GoogleTakoutFixup';
+const rootFolder = process.env.HOME + '/GoogleTakeoutFixup';
 
 LogicWip.Go(rootFolder);

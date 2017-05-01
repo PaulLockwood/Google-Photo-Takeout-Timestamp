@@ -74,7 +74,7 @@ export class LogicWip {
             // Find .jpg files in the folder
             let files = fs.readdirSync(folder);
             // Filter to just *.jpg
-            jpgFiles = files.filter((x: string) => x.toLowerCase().endsWith(".jpg"));
+            jpgFiles = files.filter((x: string) => !x.toLowerCase().endsWith(".json"));
         }
 
         // Find files who's name don't include the implicit timestamp
