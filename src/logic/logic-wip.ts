@@ -14,7 +14,7 @@ export class LogicWip {
         console.log(Logger.stringify(subFolders));
         console.log("3");
 
-        LogicWip.ProcessOneFolderOfPhotos(subFolders[0]);
+        LogicWip.GetDefaultDateForFolder(subFolders[0]);
 
         // for (let curFolder of subFolders) {
         //     LogicWip.ProcessOneFolderOfPhotos(curFolder);
@@ -51,16 +51,18 @@ export class LogicWip {
         return promise1;
     }
 
-    static ProcessOneFolderOfPhotos(folder: string) {
+    static GetDefaultDateForFolder(folder: string) {
         // Read date from the .json file
         let jsonFile = path.join(folder, 'metadata.json');
 
         let json = fs.readFileSync(jsonFile, "utf8");
-        console.log(Logger.stringify(json));
+        // console.log(Logger.stringify(json));
         const jsonObj = JSON.parse(json);
         const dateString = (jsonObj as any).albumData.date;
-        console.log(dateString);
+        // console.log(dateString);
         const jsDate: Date = new Date(Date.parse(dateString))
-        console.log(jsDate.toLocaleString());
+        console.log('Default date for folder: ' + jsDate.toLocaleString());
     }
+
+    
 }
